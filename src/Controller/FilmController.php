@@ -43,4 +43,23 @@ class FilmController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route("/film/edit/{id}", name: "film_edit", requirements: ["id" => "\d+"], methods: ['GET', 'POST'])]
+    public function edit(Film $film, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $form = $this->createForm(FilmFormType::class, $film);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($film);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("app_film");
+        }
+
+        return $this->render("film/edit.html.twig", [
+            "form" => $form,
+            'film' => $film,
+        ]);
+    }
 }
