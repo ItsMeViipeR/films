@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FilmRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
@@ -13,14 +14,17 @@ class Film
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 150)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 200, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $summary = null;
 
-    #[ORM\ManyToOne]
-    private ?Category $category = null;
+    #[ORM\Column(length: 50)]
+    private ?string $author = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
     public function getId(): ?int
     {
@@ -58,14 +62,26 @@ class Film
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getAuthor(): ?string
     {
-        return $this->category;
+        return $this->author;
     }
 
-    public function setCategory(?Category $category): static
+    public function setAuthor(string $author): static
     {
-        $this->category = $category;
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
