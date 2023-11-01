@@ -47,7 +47,7 @@ final class CategoryFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            "name" => self::faker()->unique()->words(3),
+            "name" => self::faker()->unique()->words(3, true),
         ];
     }
 

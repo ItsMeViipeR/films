@@ -3,18 +3,120 @@
 {% block title %}Hello FilmController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap");
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        img {
+            width: 100%;
+            border-radius: 12px;
+            height: 214px;
+            object-fit: cover;
+        }
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/media/viiper/SSD Externe/Dev/Web/films/src/Controller/FilmController.php'|file_link(0) }}">src/Controller/FilmController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/media/viiper/SSD Externe/Dev/Web/films/templates/film/index.html.twig'|file_link(0) }}">templates/film/index.html.twig</a></code></li>
-    </ul>
-</div>
+        body {
+            background-color: #eaeff1;
+            font-family: "Raleway", sans-serif;
+        }
+
+        #container {
+            max-width: 300px;
+        }
+
+        .card {
+            /* Change background color */
+            background-color: white;
+
+            /* Add border */
+            border: 1px solid #bacdd8;
+
+            /* Add space between the border and the content */
+            padding: 8px;
+
+            border-radius: 12px;
+        }
+
+        /* Style div elements that have class equal to tag */
+        .tag {
+            padding: 4px 8px;
+            border: 1px solid #e5eaed;
+
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #788697;
+        }
+
+        /* Style div elements that have class equal to name */
+        .name {
+            font-size: 24px;
+            font-weight: 600;
+
+            margin-top: 16px;
+        }
+
+        /* Style p element */
+        p {
+            font-size: 14px;
+            color: #7f8c9b;
+            line-height: 150%;
+        }
+
+        /* Style button element */
+        button {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+
+            font-weight: 600;
+            color: #0077ff;
+            background-color: #e0efff;
+
+            /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+            margin: 0 auto;
+            display: block;
+
+            /* Button is a clickable element, therefore it should have a pointer cursor */
+            cursor: pointer;
+        }
+
+        .card__details {
+            /* Add space around the details */
+            padding: 16px 8px 8px 8px;
+        }
+
+        button {
+            transition: all .2s ease-in-out;
+        }
+
+        /* Add style when button is focused or hovered */
+        button:focus,
+        button:hover {
+            background-color: #0077ff;
+            color: #e0efff;
+        }
+    </style>
+
+    <div class="flex justify-center items-center p-6">
+        <div class="grid grid-cols-2 gap-5 container">
+            {% for film in films %}
+                <article class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s]">
+                    <div class="rounded-[10px] bg-white p-4 !pt-20 sm:p-6">
+                        <a href="#">
+                            <h3 class="mt-0.5 text-lg font-medium text-gray-900">
+                                {{ film.title }}
+                            </h3>
+                        </a>
+
+                        <p>{{ film.summary }}</p>
+
+                        <div class="mt-4 flex flex-wrap gap-1">
+                        <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-xs text-purple-600">
+                            {{ film.category.name }}
+                        </span>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
