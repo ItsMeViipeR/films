@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Film;
 use App\Repository\FilmRepository;
+use DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -47,8 +48,11 @@ final class FilmFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'title' => self::faker()->text(180),
+            'title' => self::faker()->text(150),
             "category" => CategoryFactory::random(),
+            "author" => self::faker()->words(1, true),
+            "summary" => self::faker()->text(),
+            "created_at" => DateTimeImmutable::createFromMutable(self::faker()->datetime()),
         ];
     }
 
