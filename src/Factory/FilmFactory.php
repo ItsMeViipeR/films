@@ -48,6 +48,7 @@ final class FilmFactory extends ModelFactory
     {
         return [
             'title' => self::faker()->text(180),
+            "category" => CategoryFactory::random(),
         ];
     }
 

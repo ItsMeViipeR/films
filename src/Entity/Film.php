@@ -19,6 +19,9 @@ class Film
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $summary = null;
 
+    #[ORM\ManyToOne]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +54,18 @@ class Film
     public function setSummary(?string $summary): static
     {
         $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
