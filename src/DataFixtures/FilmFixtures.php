@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\FilmFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 ;
@@ -10,9 +11,6 @@ class FilmFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
-        $manager->flush();
+        FilmFactory::createMany(10);
     }
 }
