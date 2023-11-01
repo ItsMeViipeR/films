@@ -70,4 +70,15 @@ class FilmController extends AbstractController
             "film" => $film,
         ]);
     }
+
+    #[Route("/film/delete/{id}", name: "film_delete", requirements: ["id" => "\d+"], methods: ["POST"])]
+    public function delete(Film $film, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$film->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($film);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_film');
+    }
 }
