@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ film.title }}{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col justify-center items-center">
-        <section class="flex flex-col justify-center items-center p-6 gap-6 w-10/12">
-            <section class="flex flex-col justify-center items-center p-6 gap-6 w-10/12">
-                <h1 id="title" class="text-center font-extrabold text-4xl">{{ film.title }}</h1>
+    <section>
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+                <div class="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+                    <img
+                            alt="Film image"
+                            src="https://source.unsplash.com/random/200x200?sig=1"
+                            class="absolute inset-0 h-full w-full object-cover"
+                    />
+                </div>
 
-                <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">{{ film.category.name }}</span>
+                <div class="lg:py-24">
+                    <h2 class="text-3xl font-bold sm:text-4xl">{{ film.title }}</h2>
 
-                <div class="divider"></div>
+                    <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">{{ film.category.name }}</span>
 
-                <article class="p-6 leading-8 w-9/12">
-                    <p>{{ film.summary }}</p>
-                </article>
-            </section>
-    </div>
+                    <p class="mt-6">Par : {{ film.author }}</p>
+
+                    <p class="mt-4">
+                        {{ film.summary }}
+                    </p>
+
+                    <p class="mt-6">Sortie le {{ film.createdAt|date("d/m/Y") }}</p>
+
+                    <a href="#" class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">
+                        Voir le film
+                    </a>
+
+                    <a class="mt-8 inline-block rounded bg-blue-600 px-12 py-3 text-sm font-medium transition hover:bg-blue-700 focus:outline-none focus:ring focus:ring-yellow-400" href={{ path("film_edit", {id: film.id} )}}>
+                        Editer le film
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

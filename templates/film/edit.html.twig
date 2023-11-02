@@ -13,6 +13,8 @@
         <form action="{{ path('film_delete', {id: film.id}) }}" method="post" class="flex mt-6 justify-center">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ film.id) }}" />
             <button type="submit" class="btn btn-error">Supprimer</button>
+
+            <input type="hidden" name="_token" />
         </form>
     </div>
 {% endblock %}

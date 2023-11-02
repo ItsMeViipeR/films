@@ -26,7 +26,8 @@ class FilmFormType extends AbstractType
                 "choice_label" => "name"
             ])
             ->add("created_at", DateTimeType::class, [
-                "input" => "datetime_immutable"
+                "input" => "datetime_immutable",
+                "widget" => "single_text",
             ])
         ;
     }
